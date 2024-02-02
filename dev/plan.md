@@ -1,45 +1,65 @@
 # class descriptions
 
-## Game
+Server
+- ?
+
+Game  
+- Move
+
+Client  
+- Game  
+- ClientSideConnection ? (class olmak zorunda değil)
+
+## Server
+
+- ?
+
+## Client
 
 - main class
-- has a Board object (maybe multiple Boards?)
+- has a Game object
 - handles gui stuff
 - keeps track of the score (optional)
 
-## Board
+## Game
 
+- Game Mode
 - handles internal logic
-- stores the game state
-- has a tree of Move objects
+- Move head ptrs
 - timers (optional)
 
 ## Move
 
 - stores move data
 - has a vector of forward pointers, and a back pointer
-
+- Board after move
 
 # details
 
-## Game
+- We are looking to have a `playing mode` and an `analysis mode` with seemless integration between them after the game is over.
+
+## Client
 
 - sdl2 stuff
+	- needs a Board to display, pulled from the Game object
 
 - new game
-	- creates an empty Board
+	- creates a new Game with an empty Move tree
 
 - terminate game
-	- send the Board into oblivion
+	- terminates the Game
 
 - load game
-	- creates a Board with the provided Move tree
+	- creates a Game object with a given Move object (or read from a file ?)
+
+- go to analysis
 
 
-## Board
+## Game
 
 - go to move
 	- sets the board to the position after the given move
+	- note that this needs to get input from the gui. thus, a (very smart) function from the Client class needs to call this.
 
 - insert move
 	- appends the Move tree with the given Move
@@ -51,3 +71,14 @@
 	- extracts the Move tree into a file
 
 ## Move
+
+- Board: array<char>
+- forward_ptrs: array<Move*>
+- back_ptr: Move*
+
+## TODO
+- Learn SDL2
+- Learn socket programming with C++
+- Import std-proj project structure
+- Find a format for serializing games, i.e. saving games and vice versa, i.e. loading games.
+- Development Order: Move -> Game -> Client, Server
