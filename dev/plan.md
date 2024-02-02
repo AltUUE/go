@@ -27,27 +27,27 @@
 - sdl2 stuff
 
 - new game
-	creates an empty Board
+	- creates an empty Board
 
 - terminate game
-	send the Board into oblivion
+	- send the Board into oblivion
 
 - load game
-	creates a Board with the provided Move tree
+	- creates a Board with the provided Move tree
 
 
 ## Board
 
 - go to move
-	sets the board to the position after the given move
+	- sets the board to the position after the given move
 
 - insert move
-	appends the Move tree with the given Move
+	- appends the Move tree with the given Move
 
 - delete line
-	deletes a Move subtree
+	- deletes a Move subtree
 
 - extract game
-	extracts the Move tree into a file
+	- extracts the Move tree into a file
 
 ## Move
