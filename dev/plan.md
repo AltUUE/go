@@ -76,9 +76,14 @@ Client
 - forward_ptrs: array<Move*>
 - back_ptr: Move*
 
-## TODO
+# TODO
 - Learn SDL2
 - Learn socket programming with C++
 - Import std-proj project structure
 - Find a format for serializing games, i.e. saving games and vice versa, i.e. loading games.
 - Development Order: Move -> Game -> Client, Server
+
+# sources
+
+- https://beej.us/guide/bgnet/html/
+- https://longwelwind.net/blog/networking-turn-based-game/
