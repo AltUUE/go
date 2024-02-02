@@ -1,4 +1,4 @@
-# classes descriptions
+# class descriptions
 
 ## Game
 
