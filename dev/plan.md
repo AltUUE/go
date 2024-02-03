@@ -1,14 +1,13 @@
-# class descriptions
+# Class descriptions
 
 Server
 - ?
 
-Game  
+Game
 - Move
 
-Client  
-- Game  
-- ClientSideConnection ? (class olmak zorunda değil)
+Client
+- Game
 
 ## Server
 
@@ -34,9 +33,10 @@ Client
 - has a vector of forward pointers, and a back pointer
 - Board after move
 
-# details
+# Details
 
 - We are looking to have a `playing mode` and an `analysis mode` with seemless integration between them after the game is over.
+	- Also `editor mode`
 
 ## Client
 
@@ -72,16 +72,16 @@ Client
 
 ## Move
 
-- Board: array<char>
-- forward_ptrs: array<Move*>
-- back_ptr: Move*
+- Board: array\<char>
+- forward_ptrs: array\<Move\*>
+- back_ptr: Move\*
 
 # TODO
 - Learn SDL2
 - Learn socket programming with C++
 - Import std-proj project structure
 - Find a format for serializing games, i.e. saving games and vice versa, i.e. loading games.
-- Development Order: Move -> Game -> Client, Server
+- Development Order: Move -> Game -> Client, Server (optional?)
 
 # sources
 
