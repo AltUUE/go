@@ -1,6 +1,7 @@
 #ifndef _GAME_HPP
 #define _GAME_HPP
 
+#include <string>
 #include "Move.hpp"
 
 namespace GO{
@@ -14,6 +15,7 @@ namespace GO{
 		Game();
 		~Game();
 		
+		std::string extract_moves() const;
 		
 	};
 };
