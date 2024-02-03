@@ -5,9 +5,9 @@
 
 template<size_t N>
 GO::Game<N>::Game(){
-	// if(N != 9 && N != 13 && N != 19){
-	// 	throw std::exception("Only 9x9, 13x13, and 19x19 boards are supported.");
-	// }
+	if(N != 9 && N != 13 && N != 19){
+		throw std::invalid_argument("Only 9x9, 13x13, and 19x19 boards are supported.");
+	}
 	
 	root_move = new Move<N>();
 	last_move = root_move;
