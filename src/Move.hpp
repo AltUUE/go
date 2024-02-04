@@ -13,6 +13,7 @@ namespace GO{
 		
 		public:
 		
+		unsigned int move_number;
 		char play_x, play_y;
 		char ko_x, ko_y;
 		std::array<std::array<Stone, 19>, 19> board;
@@ -23,6 +24,8 @@ namespace GO{
 		
 		Move();
 		Move(char x, char y, Move* p);
+		// Move(const Move& rhs);
+		// Move& operator=(const Move& rhs);
 		~Move();
 		
 		private:

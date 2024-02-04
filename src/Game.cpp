@@ -27,7 +27,7 @@ bool GO::Game::insert_move(char x, char y){
 	if(mode == GameMode::Analysis || mode == GameMode::Play && last_move->next.size() == 0){
 		Move* mv;
 		if(x == -1){
-			// pass
+			// -1 is the code for pass
 			if(last_move->play_x == -1){
 				// terminate_game();
 			}
