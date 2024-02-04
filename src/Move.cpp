@@ -24,33 +24,6 @@ GO::Move::Move(char x, char y, GO::Move* p){
 	prev = p;
 }
 
-// GO::Move::Move(const GO::Move& rhs){
-// 	move_number = rhs.move_number;
-// 	play_x = rhs.play_x;
-// 	play_y = rhs.play_y;
-// 	ko_x = rhs.ko_x;
-// 	ko_y = rhs.ko_y;
-// 	board = rhs.board;
-// 	turn = rhs.turn;
-	
-// 	prev = rhs.prev;
-// 	next = rhs.next;
-// }
-
-// GO::Move& GO::Move::operator=(const Move& rhs){
-// 	move_number = rhs.move_number;
-// 	play_x = rhs.play_x;
-// 	play_y = rhs.play_y;
-// 	ko_x = rhs.ko_x;
-// 	ko_y = rhs.ko_y;
-// 	board = rhs.board;
-// 	turn = rhs.turn;
-	
-// 	prev = rhs.prev;
-// 	next = rhs.next;
-// 	return *this;
-// }
-
 GO::Move::~Move(){
 	for(Move* mv : next){
 		if(mv != nullptr){

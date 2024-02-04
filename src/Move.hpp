@@ -24,8 +24,6 @@ namespace GO{
 		
 		Move();
 		Move(char x, char y, Move* p);
-		// Move(const Move& rhs);
-		// Move& operator=(const Move& rhs);
 		~Move();
 		
 		private:
