@@ -1,5 +1,4 @@
-#ifndef _MOVE_CPP
-#define _MOVE_CPP
+#include "Move.hpp"
 
 GO::Move::Move(){
 	move_number = 0;
@@ -32,5 +31,3 @@ GO::Move::~Move(){
 		}
 	}
 }
-
-#endif

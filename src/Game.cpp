@@ -1,7 +1,5 @@
-#ifndef _GAME_CPP
-#define _GAME_CPP
-
-#include <exception>
+#include <stdexcept>
+#include "Game.hpp"
 
 GO::Game::Game(size_t n){
 	N = n;
@@ -24,7 +22,7 @@ std::string GO::Game::extract_moves() const {
 }
 
 bool GO::Game::insert_move(char x, char y){
-	if(mode == GameMode::Analysis || mode == GameMode::Play && last_move->next.size() == 0){
+	if(mode == GameMode::Analysis || (mode == GameMode::Play && last_move->next.size() == 0)){
 		Move* mv;
 		if(x == -1){
 			// -1 is the code for pass
@@ -156,5 +154,3 @@ int GO::Game::_remove_stones(char x, char y, GO::Move* mv, GO::Stone stone_color
 	
 	return cnt;
 }
-
-#endif

@@ -10,9 +10,7 @@ namespace GO{
 	};
 	
 	class Move{
-		
-		public:
-		
+	public:
 		unsigned int move_number;
 		char play_x, play_y;
 		char ko_x, ko_y;
@@ -25,11 +23,7 @@ namespace GO{
 		Move();
 		Move(char x, char y, Move* p);
 		~Move();
-		
-		private:
 	};
 };
-
-#include "Move.cpp"
 
 #endif

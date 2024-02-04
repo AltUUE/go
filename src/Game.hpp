@@ -10,9 +10,7 @@ namespace GO{
 	};
 	
 	class Game{
-		
-		public:
-		
+	public:	
 		GameMode mode;
 		Move* root_move;
 		Move* last_move;
@@ -25,8 +23,7 @@ namespace GO{
 		void terminate_game();
 		size_t boardSize() const;
 		
-		private:
-		
+	private:	
 		size_t N;
 		static constexpr std::pair<char, char> _it[4] = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
 		
@@ -38,7 +35,5 @@ namespace GO{
 		int _remove_stones(char x, char y, Move* mv, Stone stone); // removes a group of stones
 	};
 };
-
-#include "Game.cpp"
 
 #endif
