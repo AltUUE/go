@@ -4,6 +4,7 @@
 
 int main(){
 	GO::Game<9> g;
+	g.mode = GO::GameMode::Analysis;
 	
 	int in1, in2;
 	

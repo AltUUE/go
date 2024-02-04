@@ -23,6 +23,8 @@ namespace GO{
 		
 		std::string extract_moves() const;
 		bool insert_move(char x, char y);
+		void terminate_game();
+		size_t boardSize() const;
 		
 		private:
 		
@@ -31,9 +33,9 @@ namespace GO{
 		std::array<std::array<bool, N>, N> _vis;
 		void _reset_vis();
 		
-		Move<N>* _make_move(char x, char y);
-		int _count_libs(char x, char y, Move<N>* mv, Stone stone);
-		int _remove_stones(char x, char y, Move<N>* mv, Stone stone);
+		Move<N>* _make_move(char x, char y); // creates a move object based on last_move
+		int _count_libs(char x, char y, Move<N>* mv, Stone stone); // counts liberty points of a given group
+		int _remove_stones(char x, char y, Move<N>* mv, Stone stone); // removes a group of stones
 	};
 };
 

@@ -26,18 +26,34 @@ std::string GO::Game<N>::extract_moves() const {
 
 template<size_t N>
 bool GO::Game<N>::insert_move(char x, char y){
-	
-	// check game mode
-	
-	Move<N>* mv = _make_move(x, y);
-	if(mv == nullptr){
-		return false;
+	if(mode == GameMode::Analysis || mode == GameMode::Play && last_move->next.size() == 0){
+		Move<N>* mv;
+		if(x == -1){
+			// pass
+			if(last_move->play_x == -1){
+				// terminate_game();
+			}
+			mv = new Move(-1, -1, last_move);
+		}
+		else{
+			// create move object with new board
+			mv = _make_move(x, y);
+			if(mv == nullptr){
+				return false;
+			}
+		}
+		
+		last_move->next.push_back(mv);
+		last_move = mv;
+		
+		return true;
 	}
-	
-	last_move->next.push_back(mv);
-	last_move = mv;
-	
-	return true;
+	return false;
+}
+
+template<size_t N>
+size_t GO::Game<N>::boardSize() const {
+	return N;
 }
 
 template<size_t N>
