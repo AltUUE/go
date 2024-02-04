@@ -1,8 +1,7 @@
 #ifndef _MOVE_CPP
 #define _MOVE_CPP
 
-template<size_t N>
-GO::Move<N>::Move(){
+GO::Move::Move(){
 	play_x = -1;
 	play_y = -1;
 	ko_x = -1;
@@ -11,8 +10,7 @@ GO::Move<N>::Move(){
 	turn = 0;
 }
 
-template<size_t N>
-GO::Move<N>::Move(char x, char y, GO::Move<N>* p){
+GO::Move::Move(char x, char y, GO::Move* p){
 	play_x = x;
 	play_y = y;
 	ko_x = -1;
@@ -22,8 +20,7 @@ GO::Move<N>::Move(char x, char y, GO::Move<N>* p){
 	turn = !p->turn;
 }
 
-template<size_t N>
-GO::Move<N>::~Move(){
+GO::Move::~Move(){
 	for(Move* mv : next){
 		delete mv;
 	}

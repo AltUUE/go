@@ -9,14 +9,13 @@ namespace GO{
 		Empty, Black, White
 	};
 	
-	template<size_t N>
 	class Move{
 		
 		public:
 		
 		char play_x, play_y;
 		char ko_x, ko_y;
-		std::array<std::array<Stone, N>, N> board;
+		std::array<std::array<Stone, 19>, 19> board;
 		bool turn; // 0 -> white played last
 		
 		Move* prev;
@@ -25,6 +24,8 @@ namespace GO{
 		Move();
 		Move(char x, char y, Move* p);
 		~Move();
+		
+		private:
 	};
 };
 

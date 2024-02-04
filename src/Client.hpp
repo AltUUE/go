@@ -17,7 +17,7 @@ namespace GO{
 		
 		private:
 		
-		void _new_game();
+		void _new_game(size_t n);
 		
 	};
 };

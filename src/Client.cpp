@@ -13,4 +13,8 @@ void GO::Client::loop(){
 	
 }
 
+void GO::Client::_new_game(size_t n){
+	
+}
+
 #endif
