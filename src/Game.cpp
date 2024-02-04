@@ -21,6 +21,7 @@ GO::Game<N>::~Game(){
 template<size_t N>
 std::string GO::Game<N>::extract_moves() const {
 	
+	// TODO
 	return "";
 }
 
