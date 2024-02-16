@@ -1,7 +1,7 @@
 CC=g++-13
 CFLAGS=-Wall -O2
 IFLAGS=
-LFLAGS=-lSDL2 -lSDL2main -lSDL2_image -lstdc++
+LFLAGS=-lSDL2 -lSDL2main -lSDL2_image
 
 DEP=.deps
 DEPFLAGS=-MT $@ -MMD -MP -MF $(DEP)/$*.d
