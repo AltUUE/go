@@ -1,7 +1,7 @@
 CC=g++-13
 CFLAGS=-Wall -O2
-IFLAGS=-I/opt/homebrew/include
-LFLAGS=-L/opt/homebrew/lib -lSDL2 -lSDL2main -lSDL2_image -lstdc++
+IFLAGS=
+LFLAGS=-lSDL2 -lSDL2main -lSDL2_image -lstdc++
 
 DEP=.deps
 DEPFLAGS=-MT $@ -MMD -MP -MF $(DEP)/$*.d
