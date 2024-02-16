@@ -15,7 +15,8 @@ namespace GO{
 		char play_x, play_y;
 		char ko_x, ko_y;
 		std::array<std::array<Stone, 19>, 19> board;
-		bool turn; // 0 -> white played last
+		bool turn; // 0 -> black to move - white played last
+		int captured_pts[2]; // 0 -> black captured white - add to black
 		
 		Move* prev;
 		std::vector<Move*> next;

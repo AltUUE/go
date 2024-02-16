@@ -142,6 +142,12 @@ int GO::Game::_count_libs(char x, char y, GO::Move* mv, GO::Stone stone_color){
 int GO::Game::_remove_stones(char x, char y, GO::Move* mv, GO::Stone stone_color){
 	mv->board[x][y] = Stone::Empty;
 	int cnt = 1;
+	if(stone_color == Stone::White){
+		mv->captured_pts[0]++;
+	}
+	else{
+		mv->captured_pts[1]++;
+	}
 	
 	unsigned char ix, iy;
 	for(std::pair<char, char> p : _it){

@@ -7,6 +7,7 @@ GO::Move::Move(){
 	ko_x = -1;
 	ko_y = -1;
 	turn = 0;
+	captured_pts[0] = captured_pts[1] = 0;
 	
 	prev = nullptr;
 }
@@ -19,6 +20,8 @@ GO::Move::Move(char x, char y, GO::Move* p){
 	ko_y = -1;
 	board = p->board;
 	turn = !p->turn;
+	captured_pts[0] = p->captured_pts[0];
+	captured_pts[1] = p->captured_pts[1];
 	
 	prev = p;
 }
