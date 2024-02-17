@@ -2,7 +2,7 @@
 #define _GAME_HPP
 
 #include <string>
-#include "Move.hpp"
+#include "Move.h"
 
 namespace GO{
 	enum class GameMode : char {

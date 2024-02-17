@@ -2,9 +2,8 @@
 #define _CLIENT_HPP
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include "Game.hpp"
-
+#include "CSML_Client.h"
+#include "Game.h"
 
 namespace GO{
 	void _make_FRect(SDL_FRect& rect, double x, double y, double w, double h);
@@ -14,8 +13,6 @@ namespace GO{
 		Client(size_t board_size);
 		~Client();
 		
-		// void run();
-		
 	private:
 		SDL_Window* _window;
 		SDL_Renderer* _renderer;
@@ -23,6 +20,8 @@ namespace GO{
 		
 		size_t _board_size;
 		Game _g;
+
+		CSML_Client* _client;
 		
 		int _screen_width = 1000;
 		int _screen_heigth = 750;
@@ -32,12 +31,12 @@ namespace GO{
 		double _gap_size_px;
 		double _stone_size_px;
 		double x_offset, y_offset;
-		
+
 		void _recalibrate();
 		void _handle_mouse_button_down(SDL_Event& evt);
 		void _render_board();
 		void _process_events();
-		void _initialize();
+		void _initialize_SDL();
 		void _loop();
 		void _new_game(size_t n);
 	};

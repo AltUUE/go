@@ -1,5 +1,5 @@
 #include <stdexcept>
-#include "Game.hpp"
+#include "Game.h"
 
 GO::Game::Game(size_t n){
 	N = n;

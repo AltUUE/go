@@ -1,5 +1,8 @@
-#include "Client.hpp"
+#include "Client.h"
 #include <iostream>
+
+#define HOST "localhost"
+#define PORT "9034"
 
 void GO::_make_FRect(SDL_FRect& rect, double x, double y, double w, double h){
     rect.x = x;
@@ -35,16 +38,21 @@ GO::Client::Client(size_t board_size) : _board_size(board_size), _g(board_size){
     _board = nullptr;
     
     _g.mode = GameMode::Analysis;
-    
-    _initialize();
+    _client = make_client(HOST, PORT, 256);
+
+    _initialize_SDL();
     _loop();
+}
+
+GO::Client::~Client(){
+    free_client(_client);
 }
 
 GO::Client::~Client(){
 	SDL_Quit();
 }
 
-void GO::Client::_initialize(){
+void GO::Client::_initialize_SDL(){
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS);
     
     _window = SDL_CreateWindow("GO", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
@@ -58,10 +66,6 @@ void GO::Client::_initialize(){
     _renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
     if(_renderer == nullptr)
         fatal_error("SDL Surface couldn't be created.");
-    
-    _board = IMG_LoadTexture(_renderer, "assets/board.png");
-    if(_board == nullptr)
-        fatal_error("Board Texture couldn't be loaded.");
 }
 
 void GO::Client::_loop(){
@@ -70,6 +74,16 @@ void GO::Client::_loop(){
 	float elapsed, delta;
 	while(_loop_on){
 		start = SDL_GetPerformanceCounter();
+        int resp = poll_server(_client);
+        if(resp == -2){
+            // Server quit, do whatever you want here.
+        }
+        else if(resp == 1){
+            // Evaluate incoming message here
+
+            // use send_to_server(CSML_Client*, void*, size_t) to send.
+            // I would do that in _process_evens() tho.
+        }
         
         _process_events();
         _render_board();
@@ -162,3 +176,4 @@ void GO::Client::_handle_mouse_button_down(SDL_Event& evt){
 void GO::Client::_new_game(size_t n){
 	
 }
+

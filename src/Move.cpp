@@ -1,4 +1,4 @@
-#include "Move.hpp"
+#include "Move.h"
 
 GO::Move::Move(){
 	move_number = 0;

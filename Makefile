@@ -1,6 +1,6 @@
 CC=g++-13
 CFLAGS=-Wall -O2
-IFLAGS=
+IFLAGS=-ICSML/include -Iinclude
 LFLAGS=-lSDL2 -lSDL2main -lSDL2_image
 
 DEP=.deps

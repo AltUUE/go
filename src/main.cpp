@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Client.hpp"
+#include "Client.h"
 
 int main(){
 	GO::Client cl(9);
