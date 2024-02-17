@@ -7,6 +7,8 @@
 
 namespace GO{
 	void _make_FRect(SDL_FRect& rect, double x, double y, double w, double h);
+	void SDL_RenderDrawCircleF(SDL_Renderer* renderer, double x, double y, 
+							double radius, int r, int g, int b);
 	
 	class Client{	
 	public:	
@@ -22,6 +24,10 @@ namespace GO{
 		Game _g;
 
 		CSML_Client* _client;
+
+		int _board_dots_9[5][2] = {{2, 2}, {4, 4}, {2, 6}, {6, 2}, {6, 6}};
+		// int _board_dots_13[][];
+		// int _board_dots_19[][];
 		
 		int _screen_width = 1000;
 		int _screen_heigth = 750;

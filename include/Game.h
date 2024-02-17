@@ -23,8 +23,9 @@ namespace GO{
 		void terminate_game();
 		size_t boardSize() const;
 		
+		size_t N; // this has changed
+		
 	private:	
-		size_t N;
 		static constexpr std::pair<char, char> _it[4] = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
 		
 		std::array<std::array<bool, 19>, 19> _vis;

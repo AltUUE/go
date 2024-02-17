@@ -11,6 +11,11 @@ void GO::_make_FRect(SDL_FRect& rect, double x, double y, double w, double h){
     rect.h = h;
 }
 
+void GO::SDL_RenderDrawCircle(SDL_Renderer* renderer, double x, double y,
+                            double radius, int r, int g, int b){
+    
+}
+
 void fatal_error(const std::string& errorString){
 	std::cout << errorString << std::endl;
 	std::cout << "press enter to quit...";
@@ -46,9 +51,6 @@ GO::Client::Client(size_t board_size) : _board_size(board_size), _g(board_size){
 
 GO::Client::~Client(){
     free_client(_client);
-}
-
-GO::Client::~Client(){
 	SDL_Quit();
 }
 
@@ -113,14 +115,21 @@ void GO::Client::_render_board(){
     _recalibrate();
     SDL_FRect filler;
     
+    // Board Background
     SDL_SetRenderDrawColor(_renderer, 240, 190, 70, 255);
     _make_FRect(filler, x_offset-_gap_size_px, y_offset-_gap_size_px, _board_size_px+_gap_size_px*2, _board_size_px+_gap_size_px*2);
     SDL_RenderFillRectF(_renderer, &filler);
     
+    // Board Lines
     SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
     for(size_t i = 0; i < _board_size; i++){
         SDL_RenderDrawLineF(_renderer, x_offset + i * _gap_size_px, y_offset, x_offset + i * _gap_size_px, y_offset + (_board_size-1) * _gap_size_px);
         SDL_RenderDrawLineF(_renderer, x_offset, y_offset + i * _gap_size_px, x_offset + (_board_size-1) * _gap_size_px, y_offset + i * _gap_size_px);
+    }
+
+    // Board Circles
+    for(const int [x, y] : _board_dots_9){
+
     }
     
     for(size_t i = 0; i < _board_size; i++){
