@@ -2,8 +2,11 @@
 #define _CLIENT_HPP
 
 #include <SDL2/SDL.h>
-#include "CSML_Client.h"
-#include "Game.h"
+#include <Game.h>
+
+extern "C"{
+	#include <CSML_Client.h>
+}
 
 namespace GO{
 	void _make_FRect(SDL_FRect& rect, double x, double y, double w, double h);

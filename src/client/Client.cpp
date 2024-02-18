@@ -1,5 +1,5 @@
-#include "Client.h"
 #include <iostream>
+#include <Client.h>
 
 #define HOST "localhost"
 #define PORT "9034"
@@ -11,9 +11,10 @@ void GO::_make_FRect(SDL_FRect& rect, double x, double y, double w, double h){
     rect.h = h;
 }
 
-void GO::SDL_RenderDrawCircle(SDL_Renderer* renderer, double x, double y,
+void GO::SDL_RenderDrawCircleF(SDL_Renderer* renderer, double x, double y,
                             double radius, int r, int g, int b){
-    
+    int base_x = (int)x;
+    int base_y = (int)y;
 }
 
 void fatal_error(const std::string& errorString){
@@ -82,6 +83,7 @@ void GO::Client::_loop(){
         }
         else if(resp == 1){
             // Evaluate incoming message here
+            // The message is in _client->buffer
 
             // use send_to_server(CSML_Client*, void*, size_t) to send.
             // I would do that in _process_evens() tho.
@@ -128,7 +130,7 @@ void GO::Client::_render_board(){
     }
 
     // Board Circles
-    for(const int [x, y] : _board_dots_9){
+    for(const auto& [x, y] : _board_dots_9){
 
     }
     
