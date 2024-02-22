@@ -4,6 +4,14 @@
 #define HOST "localhost"
 #define PORT "9034"
 
+void fatal_error(const std::string& errorString){
+	std::cout << errorString << std::endl;
+	std::cout << "press enter to quit...";
+	SDL_Quit();
+	std::cin.get();
+	exit(1);
+}
+
 void GO::_make_FRect(SDL_FRect& rect, double x, double y, double w, double h){
     rect.x = x;
     rect.y = y;
@@ -11,18 +19,30 @@ void GO::_make_FRect(SDL_FRect& rect, double x, double y, double w, double h){
     rect.h = h;
 }
 
-void GO::SDL_RenderDrawCircleF(SDL_Renderer* renderer, double x, double y,
-                            double radius, int r, int g, int b){
-    int base_x = (int)x;
-    int base_y = (int)y;
+double GO::_clamp(double x, double lowerlimit = 0, double higherlimit = 1){
+    if(x < lowerlimit) return lowerlimit;
+    if(x > higherlimit) return higherlimit;
+    return x;
 }
 
-void fatal_error(const std::string& errorString){
-	std::cout << errorString << std::endl;
-	std::cout << "press enter to quit...";
-	SDL_Quit();
-	std::cin.get();
-	exit(1);
+double GO::_smoothstep(double edge1, double edge2, double distance){
+    // Hermite interpolation apparently
+    double t = _clamp((distance - edge1) / (edge2 - edge1));
+    return t * t * (3.0 - 2.0 * t);
+}
+
+void GO::SDL_DrawCircle(SDL_Renderer* renderer, int x, int y, int rad, 
+                    double alpha_constant, int r, int g, int b){
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
+    for(int x_d = (int)(-rad * (alpha_constant + 0.1)); x_d <= rad + 10; x_d++){
+        for(int y_d = (int)(-rad * (alpha_constant + 0.1)); y_d <= rad + 10; y_d++){
+            double dist = std::sqrt(x_d * x_d + y_d * y_d);
+            int alpha = (int)((1.0 - _smoothstep(rad, rad * alpha_constant, dist)) * 255);
+            SDL_SetRenderDrawColor(renderer, r, g, b, alpha);
+            SDL_RenderDrawPoint(renderer, x + x_d, y + y_d);
+        }
+    }
 }
 
 GO::Client::Client(size_t board_size) : _board_size(board_size), _g(board_size){
@@ -41,17 +61,16 @@ GO::Client::Client(size_t board_size) : _board_size(board_size), _g(board_size){
     
 	_window = nullptr;
     _renderer = nullptr;
-    _board = nullptr;
     
     _g.mode = GameMode::Analysis;
-    _client = make_client(HOST, PORT, 256);
+    // _client = make_client(HOST, PORT, 256);
 
     _initialize_SDL();
     _loop();
 }
 
 GO::Client::~Client(){
-    free_client(_client);
+    // free_client(_client);
 	SDL_Quit();
 }
 
@@ -77,17 +96,17 @@ void GO::Client::_loop(){
 	float elapsed, delta;
 	while(_loop_on){
 		start = SDL_GetPerformanceCounter();
-        int resp = poll_server(_client);
-        if(resp == -2){
+        // int resp = poll_server(_client);
+        // if(resp == -2){
             // Server quit, do whatever you want here.
-        }
-        else if(resp == 1){
+        // }
+        // else if(resp == 1){
             // Evaluate incoming message here
             // The message is in _client->buffer
 
             // use send_to_server(CSML_Client*, void*, size_t) to send.
             // I would do that in _process_evens() tho.
-        }
+        // }
         
         _process_events();
         _render_board();
@@ -129,28 +148,23 @@ void GO::Client::_render_board(){
         SDL_RenderDrawLineF(_renderer, x_offset, y_offset + i * _gap_size_px, x_offset + (_board_size-1) * _gap_size_px, y_offset + i * _gap_size_px);
     }
 
-    // Board Circles
+    // Board Dots
     for(const auto& [x, y] : _board_dots_9){
-
+        SDL_DrawCircle(_renderer, (int)(x_offset + x * _gap_size_px + 0.5), 
+                (int)(y_offset + y * _gap_size_px + 0.5), 4, 1.3, 0, 0, 0);
     }
     
     for(size_t i = 0; i < _board_size; i++){
         for(size_t j = 0; j < _board_size; j++){
             if(_g.last_move->board[i][_board_size-j-1] == Stone::White){
-                SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
-                filler.x = x_offset + i * _gap_size_px - _stone_size_px / 2;
-                filler.y = y_offset + j * _gap_size_px - _stone_size_px / 2; 
-                filler.w = _stone_size_px;
-                filler.h = _stone_size_px;
-                SDL_RenderFillRectF(_renderer, &filler);
+                SDL_DrawCircle(_renderer, (int)(x_offset + i * _gap_size_px + 0.5), 
+                        (int)(y_offset + j * _gap_size_px + 0.5), (int)(_stone_size_px / 2 + 0.5), 
+                        1.075, 255, 255, 255);
             }
             else if(_g.last_move->board[i][_board_size-j-1] == Stone::Black){
-                SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
-                filler.x = x_offset + i * _gap_size_px - _stone_size_px / 2;
-                filler.y = y_offset + j * _gap_size_px - _stone_size_px / 2; 
-                filler.w = _stone_size_px;
-                filler.h = _stone_size_px;
-                SDL_RenderFillRectF(_renderer, &filler);
+                SDL_DrawCircle(_renderer, (int)(x_offset + i * _gap_size_px + 0.5), 
+                        (int)(y_offset + j * _gap_size_px + 0.5), (int)(_stone_size_px / 2 + 0.5), 
+                        1.075, 0, 0, 0);
             }
         }
     }

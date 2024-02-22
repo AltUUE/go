@@ -1,7 +1,7 @@
 CC=g++-13
 CFLAGS=-O2
 IFLAGS=-ICSML/include -Iinclude
-LFLAGS=-LCSML -lCSML_Client -lCSML_Server -lSDL2 -lSDL2main -lSDL2_image
+LFLAGS=-LCSML -lCSML_Client -lCSML_Server -lSDL2 -lSDL2main
 
 DEP=.deps
 DEPFLAGS=-MT $@ -MMD -MP -MF $(DEP)/$*.d

@@ -10,8 +10,10 @@ extern "C"{
 
 namespace GO{
 	void _make_FRect(SDL_FRect& rect, double x, double y, double w, double h);
-	void SDL_RenderDrawCircleF(SDL_Renderer* renderer, double x, double y, 
-							double radius, int r, int g, int b);
+	double _clamp(double x, double lowerlimit, double higherlimit);
+	double _smoothstep(double edge1, double edge2, double distance);
+	void SDL_DrawCircle(SDL_Renderer* renderer, int x, int y, int rad, 
+					double alpha_constant, int r, int g, int b);
 	
 	class Client{	
 	public:	
@@ -21,7 +23,6 @@ namespace GO{
 	private:
 		SDL_Window* _window;
 		SDL_Renderer* _renderer;
-		SDL_Texture* _board;
 		
 		size_t _board_size;
 		Game _g;
